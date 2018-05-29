@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en-ca">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Github client</title>
+  <!-- If IE use the latest rendering engine -->
+
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+  <!-- Set the page to the width of the device and set the zoon level -->
+
+  <meta name="viewport" content="width = device-width, initial-scale = 1">
+
+  <!-- BOOTSTRAP REFERENECE -->
+
+  <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.5.13/vue.js"></script>
+
+  <link href = 'https://cdnjs.cloudflare.com/ajax/libs/fullPage.js/2.9.7/jquery.fullpage.css' rel = 'stylesheet'>
+  <script src = 'https://cdnjs.cloudflare.com/ajax/libs/fullPage.js/2.9.7/jquery.fullpage.js'></script>
+  <script src = 'https://cdnjs.cloudflare.com/ajax/libs/axios/0.18.0/axios.min.js'></script>
+
+  
+  <link href = "CSS/all-pages.css" rel = 'stylesheet'>
+
+<style>
+
+</style>
+<body>
+<div class="container">
+	<!-- menu -->
+	<div class="row">
+		<nav class="navbar navbar-inverse">
+			<div class="container-fluid">
+				<div class="navbar-header">
+					<a class="navbar-brand" href="#">Github Explorer</a>
+				</div>
+				<ul class="nav navbar-nav">
+					<li><a href="#" id="reposlink">Repositories</a></li>
+					<li><a href="#" id="userslink">Users</a></li>
+					<li><a href="#"></a></li>
+				</ul>
+			</div>
+		</nav>
+	</div>
+	<!-- //menu -->
+	
+	
+	<!-- all repositories -->
+	<div class="row" id="repList" hidden>
+		<h3>Repository List</h3>
+		
+		<!-- <form name="repos_search_form" action="#" onSubmit="">
+			<div class="form-group">
+				<label>Search by:</label>
+				<select name="search_repos_cryteria">
+				
+				</select>
+				<input type="text" name="search_input">
+				<input type="submit" class="btn btn-info" value="Search">
+			</div>
+		</form> -->
+		
+		<div class="container" id="repos_list">
+			<h4>Results</h4>
+			<table class="table table-striped">
+				<thead>
+					<tr>
+						<th>ID</th>
+						<th>Owner</th>
+						<th>Full name</th>
+						<th>Description</th>
+						<th>Link to website</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr v-for = 'repository in repositories'>
+						<td>{{repository.id}}</td>
+						<td>{{repository.owner.login}}</td>
+						<td>{{repository.full_name}}</td>
+						<td>{{repository.description}}</td>
+						<td><a v-bind:href="repository2.html_url"><i class="fa fa-eye"></i></a></td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+	</div>
+	
+	<!-- //all repositories -->
+	
+	<!-- search user -->
+	<div class="row" id="userSearch" hidden>
+		<h3>Information about user:</h3>
+		<form name="user_search_form">
+			<div class="form-group">
+				<label>Input username for search:</label>
+				<input type="text" name="username_field" id="usernamesearchid">
+				<button type="button" class="btn btn-info" id="searchuserbtn">Search</button>
+			</div>
+			<h4>Main information about user {{user_info.login}}</h4>
+			<p>ID: {{user_info.id}} &nbsp;&nbsp; Name {{user_info.name}}</p>
+			<p>Email {{user_info.email}}</p>
+			<div class="row">
+				<p><strong>Speciality(specialities):</strong></p>
+				<ul>
+					<li v-for = 'speciality1 in specialities'>{{speciality1}}</li>
+				</ul>
+			</div>
+			<div class="row">
+				<p><strong>All skills(programming, markup,... languages):</strong></p>
+				<ul>
+					<li v-for = 'skil in skills'>{{skil}}</li>
+				</ul>
+			</div>
+			<p>Created At {{user_info.created_at}}</p>
+			<p>Location {{user_info.location}}</p>
+			<p>Company {{user_info.company}}</p>
+			<p>Hireable {{user_info.hireable}}</p>
+			<p>Public repositories {{user_info.public_repos}}</p>
+			<p>Followers {{user_info.followers}}</p><br>
+			<hr>
+			<h4>User repositories by language:</h4>
+			<ul>
+				<li v-for = 'langactiv in activities'>{{langactiv}}</li>
+			</ul>
+			
+			<h4>Repositories of this user</h4>
+			<table class="table table-striped">
+				<thead>
+					<tr>
+						<th>ID</th>
+						<th>Full name</th>
+						<th>Description</th>
+						<th>Language</th>
+						<th>Rating</th>
+						<th>Link to website</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr v-for = 'repository2 in repositories2'>
+						<td>{{repository2.id}}</td>
+						<td>{{repository2.full_name}}</td>
+						<td>{{repository2.description}}</td>
+						<td>{{repository2.language}}</td>
+						<td>{{repository2.stargazers_count}}</td>
+						<td><a v-bind:href="repository2.html_url"><i class="fa fa-eye"></i></a></td>
+					</tr>
+				</tbody>
+			</table>
+			
+		</form>
+	</div>
+	<!-- //search user -->
+</div>
+</body>
+	<script src = "JS/main.js"></script>
+</html>
